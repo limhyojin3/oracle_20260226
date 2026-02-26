@@ -169,44 +169,44 @@ where sal > (
 
 select * from emp;
 
---각 직급의 평균 급여   => (clerk=1037.5),(salesman=1400)...
-select avg(sal)
-from emp
-group by job;
-
---각 직급의 평균 급여   => (clerk=1037.5),(salesman=1400)...
+--직급의 평균급여
 select job, avg(sal)
 from emp
-group by job;
+group by job;  --(CLERK,1037.5), (SALESMAN,1400)...
 
---전체 평균 급여
+--전체 평균급여
 select avg(sal)
-from emp;
+from emp; -- 2007.xx
 
---각 직급의 평균 급여 , 그리고 그것은   전체 평균 급여  를 넘는다
-select avg(sal)
+--직급의 평균급여,  그리고 그것은 전체 평균 급여보다 높은
+select job, avg(sal)               --직급의 이름, 평균급여를 출력
 from emp
-group by job
-having avg(sal) > (
+group by job  --(CLERK,1037.5), (SALESMAN,1400)...
+having avg(sal) > (    --group 된 후에 조건줄려면 having
     select avg(sal)
-    from emp
+    from emp --2007.xx
 );
 
 
---직급의 이름, 평균급여를 출력
-select job, avg(sal)
+
+--각 직급의 평균 급여 , 그리고 그것은   전체 평균 급여  를 넘는다
+select job, avg(sal)             --조건을 만족하는 행을 출력(직급의 이름, 평균급여를 출력)
 from emp
-group by job    --job의 이름이 같은것끼리 그룹이 된다.
-having avg(sal) > (     
+group by job                --job의 이름이 같은것끼리 그룹이 된다.
+having avg(sal) > (
     select avg(sal)
     from emp
 );
 
 --17. 급여와 보너스의 합이 2500 이상인 사람의 수를 구하시오.
 
+select * from emp;
+
 select count(*)
 from emp
 where sal + nvl(comm, 0) >= 2500;  --null값을 0으로 대체한다.
+
+--sal + comm => 800 + null (X) => 800 + nvl(comm, 0) (O)
 
 ---- PROFESSOR
 --1. EMAIL을 *****@abc.net형태로 출력하시오. 
@@ -243,3 +243,5 @@ select
     name,
     TO_CHAR(HIREDATE, 'YYYY-MM-DD')
 from professor;
+
+--복습(+)

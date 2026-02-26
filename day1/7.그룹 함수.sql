@@ -32,10 +32,23 @@ FROM STUDENT
 GROUP BY STU_DEPT;  --stu_dept 이름이 같은것끼리 그룹이 된다
 
 
+
+
+
+
+--select 컬럼1, 컬럼2, avg(속성) => 두 컬럼이 모두 group by 되어잇어야함. 그래야 AVG() 쓸수있음.** 
+--**상위그룹- 상위그룹 내에서 하위그룹 , 각 그룹별(하위그룹별) 키의 평균 **
 SELECT STU_DEPT, STU_GENDER, AVG(STU_HEIGHT) --두 컬럼(STU_DEPT, STU_GENDER) 만족하는 레코드들이 생기고/ 각 레코드에서 키의 평균 (AVG(STU_HEIGHT))을 구한다
 FROM STUDENT
 WHERE STU_GENDER IS NOT NULL
 GROUP BY STU_DEPT, STU_GENDER;  --stu_dept 이름이 같은것끼리 그룹이 되고, stu_dept 같은것 안에서 stu_gender가 같은것끼리 그룹이 된다.
+
+
+
+
+
+
+
 
 SELECT POSITION, MAX(PAY)  --생성된 그룹 레코드에서 각자 급여의 평균을 구한다.
 FROM PROFESSOR
@@ -70,7 +83,7 @@ from professor
 group by position
 having avg(pay) >= 300;  -- 위에서 조건이 하나 추가된 형태, 급여의 평균이 300이상인거
 
-select position, round(avg(pay))  --위에서 조건이 하나 추가된 형태 급여의 평균을 반올림하기
+select position, round(avg(pay))  --위에서 조건이 하나 추가된 형태. 급여의 평균을 반올림하기
 from professor
 group by position
 having avg(pay) >= 300;
