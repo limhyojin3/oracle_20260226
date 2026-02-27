@@ -60,10 +60,10 @@ select s.stu_no, avg(enr_grade)   --(20131001, 68)
 from student s
 inner join enrol e on s.stu_no = e.stu_no
 group by s.stu_no;   --s.stu_no  value가 같은것끼리 그룹이 된다.
-
---select s.stu_no, stu_name, avg(enr_grade)
---
---group by s.stu_no;         => 불가능.
+                                            
+--select s.stu_no, stu_name, avg(enr_grade)     s.stu_no | avg(enr_grade)    -> stu_name 어디에 나타내? 못 나타냄.
+--                                              20131001 |   68               
+--group by s.stu_no;         => 불가능.          
 
 --stu_name이 group by 안되어있어서 => select에 stu_name과 avg() 를 함께 쓸수없음
 select s.stu_no, stu_name, avg(enr_grade)   --(20131001, 68) 그룹의 평균을 구하고싶은데, stu_name은 그룹이 아닌데요? 하면서 에러남.
@@ -77,8 +77,8 @@ group by s.stu_no;
 --group by s.stu_no, stu_name;      => 가능          --select컬럼갯수와 group by컬럼갯수를 일치시켜주기.
                                                     --그렇지않으면 avg()쓸때 에러가 난다.
 
---**두 컬럼이 모두 group by 되어있어야함. 그래야 두 컬럼명 과 avg()를 함께 쓸수있음.
-select s.stu_no, stu_name, avg(enr_grade)   --(20131001, 68)
+--**두 컬럼이 모두 group by 되어있어야함. 그래야 두 컬럼명 과 avg()를 함께 쓸수있음.  =>  s.stu_no | stu_name | avg(enr_grade)
+select s.stu_no, stu_name, avg(enr_grade)   --(20131001, 68)                    20131001 |  김종헌   |  68
 from student s
 inner join enrol e on s.stu_no = e.stu_no
 group by s.stu_no, stu_name;  --stu_no value값이 같은것끼리 그룹이 된다. 
@@ -100,7 +100,7 @@ select *
 from student; --stu_no, stu_name, stu_dept, stu_grade, stu_class, stu_gender, stu_height, stu_weight
 
 select *
-from enrol; --stu_no, stu_no, enr_grade
+from enrol; --sub_no, stu_no, enr_grade
 
 select *            
 from student s       --student 테이블을 기준으로 enrol테이블을 inner join한다.
@@ -122,8 +122,8 @@ inner join enrol e on s.stu_no = e.stu_no;  --on조건절을 기준으로 합친
 
 
 
-select s.stu_dept, avg(enr_grade)  --그룹별 avg(enr_grade)를 구한다.
-from student s
+select s.stu_dept, avg(enr_grade)  --그룹별 avg(enr_grade)를 구한다.      =>  s.stu_dept  |  avg(enr_grade)
+from student s                                                         --   컴퓨터정보   |    69.4
 inner join enrol e on s.stu_no = e.stu_no
 group by s.stu_dept;   --s.stu_dept  value 값이 같은것끼리 그룹이 된다.
 
@@ -131,3 +131,4 @@ select * from student;
 select * from enrol;
 select * from subject;
 
+--결과를 미리 예측해보는것이 도움될듯.
