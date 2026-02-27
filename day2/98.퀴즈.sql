@@ -54,6 +54,58 @@ HAVING COUNT(ENR_GRADE) >= 2;
 
 SELECT * FROM EMP;
 SELECT * FROM DEPT;
+select * from salgrade;
+
+select *
+from emp e
+inner join dept d on e.deptno = d.deptno
+inner join salgrade s on e.sal between s.losal and s.hisal;
+
+select d.dname, round(avg(grade))
+from emp e
+inner join dept d on e.deptno = d.deptno
+inner join salgrade s on e.sal between s.losal and s.hisal
+group by d.dname;
+
+--1-2.부서 이름, 부서의 평균급여에 대한 등급을 출력
+
+select *
+from emp e
+inner join dept d on e.deptno = d.deptno;
+
+select * from salgrade;
+--
+select d.dname, avg(sal)
+from emp e
+inner join dept d on e.deptno = d.deptno
+group by d.dname;
+
+--답변:
+select t.dname, grade
+from salgrade s
+inner join (
+    select d.dname, avg(sal) avg_sal
+    from emp e
+    inner join dept d on e.deptno = d.deptno
+    group by d.dname
+) t on t.avg_sal between s.losal and s.hisal;
+
+
+
+
+
+--inner join salgrade s on e.sal between s.losal and s.hisal;
+
+
+
+
+
+
+
+
+
+
+
 
 SELECT *
 FROM EMP E
@@ -110,6 +162,21 @@ SELECT *
 FROM EMP E1
 INNER JOIN EMP E2 ON E1.MGR = E2.EMPNO;
 
+select * 
+from emp;
+
+
+select e1.empno, e1.ename, e2.ename
+from emp e1
+inner join emp e2 on e1.mgr = e2.empno
+where e2.ename = 'BLAKE';
+
+
+
+
+
+
+
 SELECT *
 FROM EMP E1
 INNER JOIN EMP E2 ON E1.MGR = E2.EMPNO
@@ -126,6 +193,33 @@ WHERE E2.ENAME = 'BLAKE';
 -- PROFESSOR, STU, DEPARTMENT
 -- '공과대학'에 속한 학생의 수 구하기 (DEPTNO1 기준)
 SELECT * FROM STU;  
+select * from department;
+
+select d3.dname, count(*)
+from stu s
+inner join department d on s.deptno1 = d.deptno
+inner join department d2 on d.part = d2.deptno
+inner join department d3 on d2.part = d3.deptno  --테이블이 붙어서 이어진 형태
+--where d3.dname = '공과대학'
+group by d3.dname;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 SELECT S.STUNO, S.NAME, D3.DNAME
 FROM STU S
