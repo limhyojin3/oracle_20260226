@@ -1,0 +1,13 @@
+
+문법차이
+
+오라클   ----- MYSQL
+
+SYSDATE      NOW()
+NVL()          IFNULL()
+||               CONCAT
+ROWNUM    LIMIT
+TO_CHAR(SYSDATE,'YYYY-MM-DD HH24:MI:SS')
+                 DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s)
+
+sequence     auto increment
